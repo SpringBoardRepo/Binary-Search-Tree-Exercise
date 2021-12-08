@@ -124,6 +124,34 @@ class BinarySearchTree {
 
   dfsPreOrder() {
 
+    // let preOrderArray = [];
+    // let current = this.root;
+    // while (current) {
+    //   preOrderArray.push(current.val);
+    //   console.log(preOrderArray);
+    //   if (current.left) {
+
+    //     current = current.left;
+    //     console.log("Current left", current);
+    //   }
+    //   else if (current.right) {
+    //     current = current.right;
+    //     console.log("Current right", current);
+    //   }
+    //   else { return; }
+    // }
+    // console.log(preOrderArray);
+    // return preOrderArray;
+    let data = [];
+    let current = this.root
+    function traversePreOrder(node) {
+      if (node === null) return;
+      data.push(node.val);
+      (node.left) && traversePreOrder(node.left);
+      (node.right) && traversePreOrder(node.right);
+    }
+    traversePreOrder(current);
+    return data;
   }
 
   /** dfsInOrder(): Traverse the array using in-order DFS.
@@ -131,20 +159,63 @@ class BinarySearchTree {
 
   dfsInOrder() {
 
+    let data = [];
+    let current = this.root;
+
+    function traverseInOrder(node) {
+
+      if (node === null) return;
+
+      node.left && traverseInOrder(node.left);
+      data.push(node.val);
+      node.right && traverseInOrder(node.right);
+    }
+
+    traverseInOrder(current);
+    return data;
+
   }
 
   /** dfsPostOrder(): Traverse the array using post-order DFS.
    * Return an array of visited nodes. */
 
   dfsPostOrder() {
+    let data = [];
+    let current = this.root;
 
+    function traverseInOrder(node) {
+
+      if (node === null) return;
+
+      node.left && traverseInOrder(node.left);
+
+      node.right && traverseInOrder(node.right);
+      data.push(node.val);
+    }
+
+    traverseInOrder(current);
+    return data;
   }
 
   /** bfs(): Traverse the array using BFS.
    * Return an array of visited nodes. */
 
   bfs() {
-
+    let node = this.root;
+    let queue = [];
+    let data = [];
+    queue.push(node);
+    while (queue.length) {
+      node = queue.shift();
+      data.push(node.val);
+      if (node.left) {
+        queue.push(node.left);
+      }
+      if (node.right) {
+        queue.push(node.right);
+      }
+    }
+    return data;
   }
 
   /** Further Study!
